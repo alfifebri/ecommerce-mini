@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-primary antialiased;
+  }
+}
+
+/* Custom scrollbar if needed */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary/20 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-secondary/40;
+}
