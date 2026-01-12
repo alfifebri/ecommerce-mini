@@ -1,18 +1,14 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Plus } from 'lucide-react';
-import Button from './Button';
-import { useCart } from '../context/CartContext';
+import Button from '../common/Button';
+import { useCart } from '../../context/CartContext';
+import { formatPrice } from '../../utils/formatters';
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
 
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(price);
-    };
+
 
     return (
         <motion.div

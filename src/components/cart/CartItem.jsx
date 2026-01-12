@@ -1,16 +1,13 @@
 import { motion } from 'framer-motion';
 import { Trash2, Minus, Plus } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../context/CartContext';
+import { formatPrice } from '../../utils/formatters';
+import { Link } from 'react-router-dom';
 
 const CartItem = ({ item }) => {
     const { updateQuantity, removeFromCart } = useCart();
 
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(price);
-    };
+
 
     return (
         <motion.div
@@ -32,7 +29,7 @@ const CartItem = ({ item }) => {
                 <div className="flex justify-between items-start">
                     <div>
                         <h3 className="text-base font-medium text-primary">
-                            <a href={`/product/${item.id}`}>{item.name}</a>
+                            <Link to={`/product/${item.id}`}>{item.name}</Link>
                         </h3>
                         <p className="mt-1 text-sm text-secondary">{item.category}</p>
                     </div>

@@ -1,21 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
-import CartItem from '../components/CartItem';
-import Button from '../components/Button';
-import PageTransition from '../components/PageTransition';
+import CartItem from '../components/cart/CartItem';
+import Button from '../components/common/Button';
+import PageTransition from '../components/common/PageTransition';
 import { ArrowRight, ShoppingBag } from 'lucide-react';
+import { formatPrice } from '../utils/formatters';
+import { TAX_RATE } from '../constants/config';
 
 const Cart = () => {
     const { cart, cartTotal, clearCart } = useCart();
     const navigate = useNavigate();
 
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(price);
-    };
+
 
     if (cart.length === 0) {
         return (
@@ -79,12 +76,12 @@ const Cart = () => {
                                 </div>
                                 <div className="flex justify-between text-secondary">
                                     <span>Tax</span>
-                                    <span className="font-medium text-slate-900">{formatPrice(cartTotal * 0.08)}</span>
+                                    <span className="font-medium text-slate-900">{formatPrice(cartTotal * TAX_RATE)}</span>
                                 </div>
                                 <div className="h-px bg-slate-100 my-4" />
                                 <div className="flex justify-between text-lg font-bold text-primary">
                                     <span>Total</span>
-                                    <span>{formatPrice(cartTotal * 1.08)}</span>
+                                    <span>{formatPrice(cartTotal * (1 + TAX_RATE))}</span>
                                 </div>
                             </div>
 

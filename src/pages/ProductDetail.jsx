@@ -1,17 +1,18 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { products } from '../data/products';
-import PageTransition from '../components/PageTransition';
-import Button from '../components/Button';
+import PageTransition from '../components/common/PageTransition';
+import Button from '../components/common/Button';
 import { useCart } from '../context/CartContext';
 import { ArrowLeft, ShoppingBag } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { formatPrice } from '../utils/formatters';
+import { useProductById } from '../hooks/useProductById';
 
 const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { addToCart } = useCart();
 
-    const product = products.find(p => p.id === parseInt(id));
+    const product = useProductById(id);
 
     if (!product) {
         return (
@@ -29,12 +30,7 @@ const ProductDetail = () => {
         );
     }
 
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(price);
-    };
+
 
     return (
         <PageTransition>

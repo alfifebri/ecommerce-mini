@@ -1,6 +1,6 @@
 import { products } from '../data/products';
-import ProductCard from '../components/ProductCard';
-import PageTransition from '../components/PageTransition';
+import ProductCard from '../components/product/ProductCard';
+import PageTransition from '../components/common/PageTransition';
 
 const Home = () => {
     return (

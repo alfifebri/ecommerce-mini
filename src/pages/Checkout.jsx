@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import PageTransition from '../components/PageTransition';
-import Button from '../components/Button';
+import PageTransition from '../components/common/PageTransition';
+import Button from '../components/common/Button';
 import { useCart } from '../context/CartContext';
 import { CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { formatPrice } from '../utils/formatters';
+import { TAX_RATE } from '../constants/config';
 
 const Checkout = () => {
     const { cartTotal, clearCart } = useCart();
@@ -20,12 +22,7 @@ const Checkout = () => {
         }, 3000);
     };
 
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(price);
-    };
+
 
     if (isSuccess) {
         return (
@@ -96,7 +93,7 @@ const Checkout = () => {
 
                             <div className="pt-6">
                                 <Button type="submit" size="lg" className="w-full py-4 text-base">
-                                    Pay {formatPrice(cartTotal * 1.08)}
+                                    Pay {formatPrice(cartTotal * (1 + TAX_RATE))}
                                 </Button>
                             </div>
                         </form>
@@ -117,12 +114,12 @@ const Checkout = () => {
                                 </div>
                                 <div className="flex justify-between text-secondary">
                                     <span>Tax</span>
-                                    <span className="font-medium text-slate-900">{formatPrice(cartTotal * 0.08)}</span>
+                                    <span className="font-medium text-slate-900">{formatPrice(cartTotal * TAX_RATE)}</span>
                                 </div>
                                 <div className="h-px bg-slate-200 my-4" />
                                 <div className="flex justify-between text-xl font-bold text-primary">
                                     <span>Total</span>
-                                    <span>{formatPrice(cartTotal * 1.08)}</span>
+                                    <span>{formatPrice(cartTotal * (1 + TAX_RATE))}</span>
                                 </div>
                             </div>
                         </div>
