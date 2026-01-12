@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Plus } from 'lucide-react';
@@ -5,10 +6,11 @@ import Button from '../common/Button';
 import { useCart } from '../../context/CartContext';
 import { formatPrice } from '../../utils/formatters';
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1578749556935-412c26d4b66d?q=80&w=1000&auto=format&fit=crop';
+
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
-
-
+    const [imgSrc, setImgSrc] = useState(product.image);
 
     return (
         <motion.div
@@ -24,7 +26,8 @@ const ProductCard = ({ product }) => {
                 <motion.img
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.4 }}
-                    src={product.image}
+                    src={imgSrc}
+                    onError={() => setImgSrc(FALLBACK_IMAGE)}
                     alt={product.name}
                     className="w-full h-full object-cover"
                 />
