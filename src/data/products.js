@@ -49,14 +49,6 @@ export const products = [
     },
     {
         id: 7,
-        name: "Ceramic Coffee Set",
-        price: 79,
-        description: "Elegant ceramic coffee set including a pour-over dripper and two matching mugs. Perfect for your morning ritual.",
-        image: "https://images.unsplash.com/photo-1578749556935-412c26d4b66d?q=80&w=1000&auto=format&fit=crop",
-        category: "Home"
-    },
-    {
-        id: 8,
         name: "Running Sneakers",
         price: 119,
         description: "Lightweight and breathable running shoes designed for speed and comfort. Features superior cushioning technology.",
